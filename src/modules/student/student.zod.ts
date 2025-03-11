@@ -33,7 +33,7 @@ export const createStudentValidationSchema = z.object({
     password: z.string().max(20).optional(),
     student: z.object({
       name: createUserNameValidationSchema,
-      gender: z.enum(['Male', 'Female', 'Other']),
+      gender: z.enum(['Male', 'Female', 'Others']),
       dateOfBirth: z.string().optional(),
       email: z.string().email(),
       contactNo: z.string(),
@@ -75,7 +75,7 @@ export const updateStudentValidationSchema = z.object({
   body: z.object({
     student: z.object({
       name: updateUserNameValidationSchema,
-      gender: z.enum(['male', 'female', 'other']).optional(),
+      gender: z.enum(['Male', 'Female', 'Others']).optional(),
       dateOfBirth: z.string().optional(),
       email: z.string().email().optional(),
       contactNo: z.string().optional(),

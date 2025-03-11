@@ -8,7 +8,7 @@ import { USER_ROLE } from '../user/user.constant';
 const router = Router();
 router.post(
   '/create-enrolled-course',
-  auth(USER_ROLE.Student),
+  auth(USER_ROLE.student),
   validateRequest(
     enrolledCourseValidation.createEnrolledCourseValidationSchema,
   ),
@@ -16,12 +16,12 @@ router.post(
 );
 router.get(
   '/my-enrolled-course',
-  auth(USER_ROLE.Student),
+  auth(USER_ROLE.student),
   enrolledCourseControllers.getMyEnrolledCourse,
 );
 router.patch(
   '/update-enrolled-course-marks',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin, USER_ROLE.Faculty),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.faculty),
   validateRequest(
     enrolledCourseValidation.updateEnrolledCourseMarksValidationSchema,
   ),

@@ -8,39 +8,39 @@ import { USER_ROLE } from '../user/user.constant';
 const router = Router();
 router.post(
   '/create-offered-course',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   validateRequest(offeredCourseValidations.createOfferedCourseValidationSchema),
   offeredCourseControllers.createOfferedCourse,
 );
 router.get(
   '/',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin, USER_ROLE.Faculty),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.faculty),
   offeredCourseControllers.getAllOfferedCourse,
 );
 router.get(
   '/my-offered-courses',
-  auth(USER_ROLE.Student),
+  auth(USER_ROLE.student),
   offeredCourseControllers.getMyOfferedCourses,
 );
 router.get(
   '/:id',
   auth(
-    USER_ROLE.SuperAdmin,
-    USER_ROLE.Admin,
-    USER_ROLE.Faculty,
-    USER_ROLE.Student,
+    USER_ROLE.superAdmin,
+    USER_ROLE.admin,
+    USER_ROLE.faculty,
+    USER_ROLE.student,
   ),
   offeredCourseControllers.getSingleOfferedCourse,
 );
 router.patch(
   '/:id',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin, USER_ROLE.Faculty),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.faculty),
   validateRequest(offeredCourseValidations.updateOfferedCourseValidationSchema),
   offeredCourseControllers.updateOfferedCourse,
 );
 router.delete(
   '/:id',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin, USER_ROLE.Faculty),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.faculty),
   offeredCourseControllers.deleteOfferedCourse,
 );
 export const offeredCourseRoutes = router;

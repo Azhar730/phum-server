@@ -1,9 +1,8 @@
 import { TAcademicSemester } from '../academicSemester/academicSemester.interface';
 import { User } from './user.model';
 
-
 const findLastStudentId = async () => {
-  const lastStudent = await User.findOne({ role: 'Student' }, { id: 1, _id: 0 })
+  const lastStudent = await User.findOne({ role: 'student' }, { id: 1, _id: 0 })
     .sort({ createdAt: -1 })
     .lean();
   return lastStudent?.id ? lastStudent.id : undefined;
@@ -34,7 +33,7 @@ export const generateStudentId = async (payload: TAcademicSemester) => {
 export const findLastFacultyId = async () => {
   const lastFaculty = await User.findOne(
     {
-      role: 'Faculty',
+      role: 'faculty',
     },
     {
       id: 1,
@@ -59,7 +58,7 @@ export const generateFacultyId = async () => {
 };
 // Admin ID
 export const findLastAdminId = async () => {
-  const lastAdmin = await User.findOne({ role: 'Admin' }, { id: 1, _id: 0 })
+  const lastAdmin = await User.findOne({ role: 'admin' }, { id: 1, _id: 0 })
     .sort({ createdAt: -1 })
     .lean();
   return lastAdmin?.id ? lastAdmin.id.substring(2) : undefined;

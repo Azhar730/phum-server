@@ -4,7 +4,6 @@ import {
   TCourseFaculty,
   TPrerequisiteCourses,
 } from './course.interface';
-import { ref } from 'joi';
 
 const preRequisiteCourseSchema = new Schema<TPrerequisiteCourses>({
   course: {

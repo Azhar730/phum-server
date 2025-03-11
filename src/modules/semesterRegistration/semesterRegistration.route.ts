@@ -8,7 +8,7 @@ import { USER_ROLE } from '../user/user.constant';
 const router = Router();
 router.post(
   '/create-semester-registration',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   validateRequest(
     semesterRegistrationValidationSchema.createSemesterRegistrationValidationSchema,
   ),
@@ -17,16 +17,16 @@ router.post(
 router.get(
   '/:id',
   auth(
-    USER_ROLE.SuperAdmin,
-    USER_ROLE.Admin,
-    USER_ROLE.Faculty,
-    USER_ROLE.Student,
+    USER_ROLE.superAdmin,
+    USER_ROLE.admin,
+    USER_ROLE.faculty,
+    USER_ROLE.student,
   ),
   semesterRegistrationControllers.getSingleSemesterRegistration,
 );
 router.patch(
   '/:id',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   validateRequest(
     semesterRegistrationValidationSchema.updateSemesterRegistrationValidationSchema,
   ),
@@ -34,16 +34,16 @@ router.patch(
 );
 router.delete(
   '/:id',
-  auth(USER_ROLE.SuperAdmin, USER_ROLE.Admin),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   semesterRegistrationControllers.deleteSemesterRegistration,
 );
 router.get(
   '/',
   auth(
-    USER_ROLE.SuperAdmin,
-    USER_ROLE.Admin,
-    USER_ROLE.Faculty,
-    USER_ROLE.Student,
+    USER_ROLE.superAdmin,
+    USER_ROLE.admin,
+    USER_ROLE.faculty,
+    USER_ROLE.student,
   ),
   semesterRegistrationControllers.getAllSemesterRegistration,
 );

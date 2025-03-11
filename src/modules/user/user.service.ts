@@ -17,6 +17,7 @@ import { TAdmin } from '../Admin/admin.interface';
 import { Admin } from '../Admin/admin.model';
 import { User } from './user.model';
 import { sendImageToCloudinary } from '../../app/utils/sendImageToCloudinary';
+import { USER_ROLE } from './user.constant';
 
 const createStudentIntoDB = async (
   file: any,
@@ -24,7 +25,7 @@ const createStudentIntoDB = async (
   payload: TStudent,
 ) => {
   const userData: Partial<TUser> = {};
-  userData.role = 'Student';
+  userData.role = 'student';
   userData.email = payload.email;
   userData.password = password || (config.default_pass as string);
 
@@ -86,7 +87,7 @@ const createFacultyIntoDB = async (
   // if password is not given, use default password
   userData.password = password || (config.default_pass as string);
   // set user role
-  userData.role = 'Faculty';
+  userData.role = 'faculty';
   userData.email = payload.email;
 
   // find academic department info
@@ -142,7 +143,7 @@ const createAdminIntoDB = async (
   // if password is not given , use default password
   userData.password = password || (config.default_pass as string);
   // set user role
-  userData.role = 'Admin';
+  userData.role = USER_ROLE.admin;
   userData.email = payload.email;
   const session = await mongoose.startSession();
   try {
@@ -180,13 +181,13 @@ const createAdminIntoDB = async (
 };
 const getMe = async (userId: string, role: string) => {
   let result;
-  if (role === 'Admin') {
+  if (role === USER_ROLE.admin) {
     result = await Admin.findOne({ id: userId }).populate('user');
   }
-  if (role === 'Faculty') {
+  if (role === USER_ROLE.faculty) {
     result = await Faculty.findOne({ id: userId }).populate('user');
   }
-  if (role === 'Student') {
+  if (role === USER_ROLE.student) {
     result = await Student.findOne({ id: userId }).populate('user');
   }
   return result;

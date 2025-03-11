@@ -9,16 +9,29 @@ cloudinary.config({
   api_secret: config.cloudinary_api_secret,
 });
 
-export const sendImageToCloudinary = async (
+export const sendImageToCloudinary = (
   imageName: string,
   path: string,
-) => {
-  (await cloudinary.uploader.upload(path, {
-    public_id: imageName,
-  })) as UploadApiResponse;
-  unlink(path, (err) => {
-    if (err) throw err;
-    console.log(`successfully deleted ${path}`);
+): Promise<Record<string, unknown>> => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      path,
+      { public_id: imageName.trim() },
+      function (error, result) {
+        if (error) {
+          reject(error);
+        }
+        resolve(result as UploadApiResponse);
+        // delete a file asynchronously
+        unlink(path, (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('File is deleted.');
+          }
+        });
+      },
+    );
   });
 };
 
